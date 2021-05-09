@@ -4,3 +4,11 @@ terraform {
     aws = "~> 3.0"
   }
 }
+
+provider "aws" {
+  default_tags {
+    tags = {
+      TfManaged = "true"
+    }
+  }
+}
