@@ -17,20 +17,20 @@ resource "aws_route_table" "route_table" {
 
 # public subnets a, b, c
 resource "aws_subnet" "public_a" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.0/24"
   availability_zone = "us-east-1a"
 }
 
 resource "aws_subnet" "public_b" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.1.0/24"
   availability_zone = "us-east-1b"
 }
 
 resource "aws_subnet" "public_c" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.2.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.2.0/24"
   availability_zone = "us-east-1c"
 }
 
@@ -51,19 +51,19 @@ resource "aws_route_table_association" "public_c" {
 
 # private subnets a, b, c
 resource "aws_subnet" "private_a" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.3.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.3.0/24"
   availability_zone = "us-east-1a"
 }
 
 resource "aws_subnet" "private_b" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.4.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.4.0/24"
   availability_zone = "us-east-1b"
 }
 
 resource "aws_subnet" "private_c" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.5.0/24"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.5.0/24"
   availability_zone = "us-east-1c"
 }
