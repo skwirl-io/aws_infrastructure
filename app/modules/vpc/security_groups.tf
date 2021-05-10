@@ -2,6 +2,22 @@ resource "aws_security_group" "lambda_sg" {
   name        = "default-lambda-sg"
   description = "default security group for lambdas"
   vpc_id      = aws_vpc.main.id
+
+  egress {
+    description = "Allow HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    description = "Allow HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group_rule" "lambda_sg_to_rds_sg" {
