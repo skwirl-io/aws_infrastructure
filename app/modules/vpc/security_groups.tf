@@ -5,23 +5,33 @@ resource "aws_security_group" "lambda_sg" {
 }
 
 resource "aws_security_group_rule" "lambda_sg_allow_http" {
-  security_group_id        = aws_security_group.lambda_sg.id
-  type                     = "egress"
-  description              = "Allow HTTP"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  cidr_blocks              = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.lambda_sg.id
+  type              = "egress"
+  description       = "Allow HTTP"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "lambda_sg_allow_https" {
-  security_group_id        = aws_security_group.lambda_sg.id
-  type                     = "egress"
-  description              = "Allow HTTPS"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  cidr_blocks              = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.lambda_sg.id
+  type              = "egress"
+  description       = "Allow HTTPS"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "lambda_sg_allow_smtp" {
+  security_group_id = aws_security_group.lambda_sg.id
+  type              = "egress"
+  description       = "Allow SMTP"
+  from_port         = 587
+  to_port           = 587
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "lambda_sg_to_rds_sg" {
