@@ -35,3 +35,10 @@ resource "aws_ssm_parameter" "jwt_secret" {
   type        = "SecureString"
   value       = "657e57e5784301eeab3dcbfef181d6b86d5c97eb3dd2770ee89f1b656248311c068e45a46e796d254be3cbacfaa96da60426696c99a68d4d5a3978a2b6d4b2d3"
 }
+
+resource "aws_ssm_parameter" "front_end_base_url" {
+  name        = "${local.ssm_parameter_prefix}FRONT_END_BASE_URL"
+  description = "jwt secret for Rodauth"
+  type        = "String"
+  value       = "https://skwirly-1993.vercel.app/"
+}
