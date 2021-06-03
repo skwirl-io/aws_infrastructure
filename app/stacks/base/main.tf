@@ -14,6 +14,10 @@ module "rds_instance" {
   ssm_parameter_prefix  = local.ssm_parameter_prefix
 }
 
+module "route53" {
+  source = "../../modules/route53"
+}
+
 # TODO: rotate and ofuscate
 resource "aws_ssm_parameter" "hmac_secret" {
   name        = "${local.ssm_parameter_prefix}HMAC_SECRET"
