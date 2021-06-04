@@ -10,10 +10,10 @@ resource "aws_route53_record" "vercel_cname" {
   records = ["cname.vercel-dns.com"]
 }
 
-# resource "aws_route53_record" "vercel_a" {
-#   zone_id = data.aws_route53_zone.zone.zone_id
-#   name    = "@"
-#   type    = "A"
-#   ttl     = "300"
-#   records = ["76.76.21.21"]
-# }
+resource "aws_route53_record" "vercel_a" {
+  zone_id = data.aws_route53_zone.zone.zone_id
+  name    = ""
+  type    = "A"
+  ttl     = "300"
+  records = ["76.76.21.21"]
+}
