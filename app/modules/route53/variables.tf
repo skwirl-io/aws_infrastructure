@@ -1,1 +1,3 @@
-# This is where you put your variables declaration
+variable "domain" {
+  description = "the base domain"
+}

@@ -12,6 +12,8 @@ module "rds_instance" {
 
 module "route53" {
   source = "../../modules/route53"
+
+  domain = var.domain
 }
 
 module "backend_parameters" {

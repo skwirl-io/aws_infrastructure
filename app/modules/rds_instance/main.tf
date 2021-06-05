@@ -1,5 +1,8 @@
-locals {
-  db_password = "zNLv2jd3s2Ob47jC"
+# max postgres password length is 99
+resource "random_password" "db_password" {
+  length  = 99
+  special = false
+  upper   = false
 }
 
 resource "aws_db_instance" "instance" {
@@ -12,7 +15,7 @@ resource "aws_db_instance" "instance" {
   instance_class    = "db.t2.micro"
   name              = "market_back"
   username          = "market_user"
-  password          = local.db_password
+  password          = random_password.db_password.result
 
   skip_final_snapshot     = true
   apply_immediately       = true
@@ -27,7 +30,7 @@ resource "aws_ssm_parameter" "db_password" {
   name        = "${var.ssm_parameter_prefix}PGPASSWORD"
   description = "RDS password"
   type        = "SecureString"
-  value       = local.db_password
+  value       = random_password.db_password.result
 }
 
 resource "aws_ssm_parameter" "db_username" {

@@ -1,5 +1,5 @@
 data "aws_route53_zone" "zone" {
-  name = "skwirlhouse1.ca"
+  name = var.domain
 }
 
 resource "aws_route53_record" "vercel_cname" {
