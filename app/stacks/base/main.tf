@@ -20,4 +20,5 @@ module "backend_parameters" {
   source = "../../modules/backend_parameters"
 
   ssm_parameter_prefix  = var.ssm_parameter_prefix
+  domain = var.domain
 }
