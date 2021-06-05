@@ -28,3 +28,10 @@ resource "aws_acm_certificate_validation" "api_domain_cert" {
   certificate_arn         = aws_acm_certificate.api_domain_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.api_domain_cert : record.fqdn]
 }
+
+resource "aws_ssm_parameter" "api_domain_cert_arn" {
+  name        = "${var.ssm_parameter_prefix}API_DOMAIN_CERT_ARN"
+  description = "base url of the frontend"
+  type        = "String"
+  value       = aws_acm_certificate.api_domain_cert.arn
+}

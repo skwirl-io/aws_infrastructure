@@ -1,5 +1,7 @@
 module "vpc" {
   source = "../../modules/vpc"
+
+  ssm_parameter_prefix  = var.ssm_parameter_prefix
 }
 
 module "rds_instance" {
@@ -14,6 +16,7 @@ module "route53" {
   source = "../../modules/route53"
 
   domain = var.domain
+  ssm_parameter_prefix  = var.ssm_parameter_prefix
 }
 
 module "backend_parameters" {

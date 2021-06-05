@@ -44,16 +44,9 @@ resource "aws_ssm_parameter" "front_end_base_url" {
   value       = "https://${var.domain}"
 }
 
-resource "aws_ssm_parameter" "rodauth_email" {
-  name        = "${var.ssm_parameter_prefix}RODAUTH_EMAIL"
+resource "aws_ssm_parameter" "domain" {
+  name        = "${var.ssm_parameter_prefix}DOMAIN"
   description = "base url of the frontend"
   type        = "String"
-  value       = "accounts@${var.domain}"
-}
-
-resource "aws_ssm_parameter" "default_email" {
-  name        = "${var.ssm_parameter_prefix}DEFAULT_EMAIL"
-  description = "base url of the frontend"
-  type        = "String"
-  value       = "info@${var.domain}"
+  value       = var.domain
 }
