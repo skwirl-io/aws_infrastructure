@@ -1,1 +1,3 @@
-# This is where you put your variables declaration
+variable "ssm_parameter_prefix" {
+  description = "The prefix to give to all SSM params in this stack"
+}
