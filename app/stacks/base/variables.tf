@@ -5,3 +5,7 @@ variable "ssm_parameter_prefix" {
 variable "domain" {
   description = "the base domain"
 }
+
+variable "environment" {
+  description = "Staging, production, dev, etc"
+}

@@ -6,6 +6,7 @@ module "vpc" {
 
 module "rds_instance" {
   source = "../../modules/rds_instance"
+  count = var.environment == "production" ? 0 : 1
 
   db_subnet_group_name  = module.vpc.db_subnet_group_name
   rds_security_group_id = module.vpc.rds_security_group_id
