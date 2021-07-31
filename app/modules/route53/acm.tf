@@ -31,7 +31,7 @@ resource "aws_acm_certificate_validation" "api_domain_cert" {
 
 resource "aws_ssm_parameter" "api_domain_cert_arn" {
   name        = "${var.ssm_parameter_prefix}API_DOMAIN_CERT_ARN"
-  description = "base url of the frontend"
+  description = "ARN of the api subdomain cert"
   type        = "String"
   value       = aws_acm_certificate.api_domain_cert.arn
 }

@@ -13,6 +13,13 @@ module "rds_instance" {
   ssm_parameter_prefix  = var.ssm_parameter_prefix
 }
 
+module "s3" {
+  source = "../../modules/s3"
+
+  domain               = var.domain
+  ssm_parameter_prefix = var.ssm_parameter_prefix
+}
+
 module "route53" {
   source = "../../modules/route53"
 
@@ -23,6 +30,6 @@ module "route53" {
 module "backend_parameters" {
   source = "../../modules/backend_parameters"
 
-  ssm_parameter_prefix = var.ssm_parameter_prefix
   domain               = var.domain
+  ssm_parameter_prefix = var.ssm_parameter_prefix
 }
