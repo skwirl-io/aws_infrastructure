@@ -123,3 +123,10 @@ resource "aws_ssm_parameter" "public_assets" {
   type        = "String"
   value       = aws_s3_bucket.public_assets.id
 }
+
+resource "aws_ssm_parameter" "public_assets_arn" {
+  name        = "${var.ssm_parameter_prefix}PUBLIC_ASSETS_BUCKET_ARN"
+  description = "Public assets bucket arn"
+  type        = "String"
+  value       = aws_s3_bucket.public_assets.arn
+}
