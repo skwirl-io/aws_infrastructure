@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "public_assets" {
-  bucket = "assets.${var.domain}"
+  bucket = var.public_assets_bucket
   acl    = "public-read"
 
   cors_rule {

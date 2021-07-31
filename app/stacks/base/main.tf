@@ -17,6 +17,7 @@ module "s3" {
   source = "../../modules/s3"
 
   domain               = var.domain
+  public_assets_bucket = var.public_assets_bucket
   ssm_parameter_prefix = var.ssm_parameter_prefix
 }
 

@@ -9,3 +9,7 @@ variable "domain" {
 variable "environment" {
   description = "Staging, production, dev, etc"
 }
+
+variable "public_assets_bucket" {
+  description = "The name of the public assets bucket"
+}
