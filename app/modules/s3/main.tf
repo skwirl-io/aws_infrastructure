@@ -1,3 +1,7 @@
+locals {
+  public_assets_url = "assets.${var.domain}"
+}
+
 resource "aws_s3_bucket" "public_assets" {
   bucket = var.public_assets_bucket
   acl    = "public-read"
@@ -20,7 +24,7 @@ data "aws_route53_zone" "zone" {
 }
 
 resource "aws_acm_certificate" "assets_domain_cert" {
-  domain_name       = "assets.${var.domain}"
+  domain_name       = local.public_assets_url
   validation_method = "DNS"
 
   lifecycle {
@@ -54,7 +58,7 @@ resource "aws_cloudfront_distribution" "public_assets" {
   enabled         = true
   is_ipv6_enabled = true
 
-  aliases = ["assets.${var.domain}"]
+  aliases = [local.public_assets_url]
 
   origin {
     domain_name = aws_s3_bucket.public_assets.bucket_domain_name
@@ -95,7 +99,7 @@ resource "aws_cloudfront_distribution" "public_assets" {
 
 resource "aws_route53_record" "public_assets_record_A" {
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "assets.${var.domain}"
+  name    = local.public_assets_url
   type    = "A"
 
   alias {
@@ -107,7 +111,7 @@ resource "aws_route53_record" "public_assets_record_A" {
 
 resource "aws_route53_record" "public_assets_record_AAAA" {
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "assets.${var.domain}"
+  name    = local.public_assets_url
   type    = "AAAA"
 
   alias {
@@ -129,4 +133,11 @@ resource "aws_ssm_parameter" "public_assets_arn" {
   description = "Public assets bucket arn"
   type        = "String"
   value       = aws_s3_bucket.public_assets.arn
+}
+
+resource "aws_ssm_parameter" "public_assets_url" {
+  name        = "${var.ssm_parameter_prefix}PUBLIC_ASSETS_URL"
+  description = "User facing endpoint of the public assets bucket"
+  type        = "String"
+  value       = "https://${local.public_assets_url}"
 }
