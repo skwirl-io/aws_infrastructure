@@ -1,3 +1,4 @@
+<% if Terraspace.env != 'production' %>
 module "vpc" {
   source = "../../modules/vpc"
 
@@ -6,7 +7,6 @@ module "vpc" {
 
 module "rds_instance" {
   source = "../../modules/rds_instance"
-  count  = var.environment == "production" ? 0 : 1
 
   db_subnet_group_name  = module.vpc.db_subnet_group_name
   rds_security_group_id = module.vpc.rds_security_group_id
@@ -20,6 +20,7 @@ module "s3" {
   public_assets_bucket = var.public_assets_bucket
   ssm_parameter_prefix = var.ssm_parameter_prefix
 }
+<% end %>
 
 module "route53" {
   source = "../../modules/route53"
