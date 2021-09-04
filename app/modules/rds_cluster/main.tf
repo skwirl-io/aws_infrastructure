@@ -25,9 +25,9 @@ resource "aws_rds_cluster" "instance" {
   backup_retention_period = 1
 
   scaling_configuration {
-    auto_pause   = true
+    auto_pause   = false
     min_capacity = 2
-    max_capacity = 8
+    max_capacity = 4
   }
 }
 
