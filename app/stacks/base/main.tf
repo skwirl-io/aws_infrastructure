@@ -1,10 +1,18 @@
-<% if Terraspace.env != 'production' %>
 module "vpc" {
   source = "../../modules/vpc"
 
   ssm_parameter_prefix = var.ssm_parameter_prefix
 }
 
+<% if Terraspace.env == 'production' %>
+module "rds_cluster" {
+  source = "../../modules/rds_cluster"
+
+  db_subnet_group_name  = module.vpc.db_subnet_group_name
+  rds_security_group_id = module.vpc.rds_security_group_id
+  ssm_parameter_prefix  = var.ssm_parameter_prefix
+}
+<% else %>
 module "rds_instance" {
   source = "../../modules/rds_instance"
 
@@ -12,6 +20,7 @@ module "rds_instance" {
   rds_security_group_id = module.vpc.rds_security_group_id
   ssm_parameter_prefix  = var.ssm_parameter_prefix
 }
+<% end %>
 
 module "s3" {
   source = "../../modules/s3"
@@ -20,7 +29,6 @@ module "s3" {
   public_assets_bucket = var.public_assets_bucket
   ssm_parameter_prefix = var.ssm_parameter_prefix
 }
-<% end %>
 
 module "route53" {
   source = "../../modules/route53"
