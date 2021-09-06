@@ -1,12 +1,21 @@
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
-resource "aws_cloud9_environment_ec2" "instance" {
+# currently requires manually attaching instance profile
+resource "aws_cloud9_environment_ec2" "cloud9" {
   name                        = "Cloud 9 Environment"
   instance_type               = "t2.micro"
   automatic_stop_time_minutes = 30
   description                 = "Cloud 9 Environment with access to jets console"
   subnet_id                   = var.subnet_id
+}
+
+data "aws_instance" "cloud9" {
+  filter {
+    name = "tag:aws:cloud9:environment"
+    values = [
+    aws_cloud9_environment_ec2.cloud9.id]
+  }
 }
 
 resource "aws_iam_role" "cloud9" {
@@ -57,4 +66,9 @@ resource "aws_iam_role" "cloud9" {
 resource "aws_iam_instance_profile" "cloud9" {
   name = "Cloud9Profile"
   role = aws_iam_role.cloud9.name
+}
+
+resource "aws_network_interface_sg_attachment" "cloud9" {
+  security_group_id    = var.sg_id
+  network_interface_id = data.aws_instance.cloud9.network_interface_id
 }

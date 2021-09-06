@@ -9,3 +9,7 @@ output "rds_security_group_id" {
 output "public_subnet_a_id" {
   value = aws_subnet.public_a.id
 }
+
+output "lambda_sg_id" {
+  value = aws_security_group.lambda_sg.id
+}
