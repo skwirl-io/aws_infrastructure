@@ -43,3 +43,11 @@ module "backend_parameters" {
   domain               = var.domain
   ssm_parameter_prefix = var.ssm_parameter_prefix
 }
+
+module "cloud9_instance" {
+  source = "../../modules/cloud9_instance"
+
+  subnet_id = module.vpc.public_subnet_a_id
+  ssm_parameter_prefix = var.ssm_parameter_prefix
+  public_assets_arn = module.s3.public_assets_arn
+}
