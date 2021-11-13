@@ -11,7 +11,7 @@ resource "aws_db_instance" "instance" {
   storage_type      = "gp2"
   allocated_storage = 10
   engine            = "postgres"
-  engine_version    = "12.6"
+  engine_version    = "12.7"
   instance_class    = "db.t2.micro"
   name              = "market_back"
   username          = "market_user"

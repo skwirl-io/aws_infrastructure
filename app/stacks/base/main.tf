@@ -42,6 +42,7 @@ module "backend_parameters" {
 
   domain               = var.domain
   ssm_parameter_prefix = var.ssm_parameter_prefix
+  environment          = var.environment
 }
 
 module "cloud9_instance" {

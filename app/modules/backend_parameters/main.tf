@@ -50,3 +50,10 @@ resource "aws_ssm_parameter" "domain" {
   type        = "String"
   value       = var.domain
 }
+
+resource "aws_ssm_parameter" "alerts_email" {
+  name        = "${var.ssm_parameter_prefix}ALERTS_EMAIL"
+  description = "internal alerts email"
+  type        = "String"
+  value       = "alerts-${var.environment}@skwirl.io"
+}
